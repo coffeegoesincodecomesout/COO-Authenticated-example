@@ -1,0 +1,1 @@
+# COO-Authenticated-example
