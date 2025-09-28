@@ -44,7 +44,7 @@ spec:
         - -openshift-service-account=thanos-querier
         - -openshift-ca=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
         - -skip-auth-regex=^/metrics
-        - -openshift-sar={"resource":"namespaces","resourceName":"thanos-querier","namespace":"ns1-coo","verb":"get"}
+        - -openshift-sar={"resource":"namespaces","resourceName":"thanos-querier","namespace":"project-b","verb":"get"}
         image: quay.io/openshift/origin-oauth-proxy:4.19
         imagePullPolicy: IfNotPresent
         name: oauth-proxy
