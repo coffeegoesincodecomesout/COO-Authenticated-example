@@ -3,7 +3,7 @@ kind: Namespace
 metadata:
   name: project-a
   labels:
-    monitoring.rhobs/stack: multi-ns
+    monitoring.rhobs/stack: project-a
 ---
 apiVersion: monitoring.rhobs/v1alpha1
 kind: MonitoringStack
@@ -11,7 +11,7 @@ metadata:
   name: example-coo-monitoring-stack
   namespace: project-a
   labels:
-    discover: thanos
+    discover: project-a
 spec:
   logLevel: debug
   retention: 1d
@@ -20,7 +20,7 @@ spec:
         k8s-app: prometheus-coo-example-monitor
   namespaceSelector:
       matchLabels:
-        monitoring.rhobs/stack: multi-ns
+        monitoring.rhobs/stack: project-a
 ---
 apiVersion: monitoring.rhobs/v1alpha1
 kind: ThanosQuerier
@@ -30,4 +30,4 @@ metadata:
 spec:
   selector:
     matchLabels:
-      discover: thanos
+      discover: project-a
