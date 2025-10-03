@@ -3,7 +3,7 @@ kind: Namespace
 metadata:
   name: project-c
   labels:
-    monitoring.rhobs/stack: multi-ns
+    monitoring.rhobs/stack: project-c
 ---
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
@@ -55,7 +55,7 @@ spec:
         k8s-app: prometheus-coo-example-monitor
   namespaceSelector:
       matchLabels:
-        monitoring.rhobs/stack: multi-ns
+        monitoring.rhobs/stack: project-c
 ---
 apiVersion: monitoring.rhobs/v1alpha1
 kind: ThanosQuerier
@@ -65,7 +65,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      discover: multi-ns
+      discover: project-c
 ---
 apiVersion: apps/v1
 kind: Deployment
