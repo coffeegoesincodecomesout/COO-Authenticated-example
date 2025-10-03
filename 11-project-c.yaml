@@ -46,7 +46,7 @@ metadata:
   name: example-coo-monitoring-stack
   namespace: project-c
   labels:
-    discover: multi-ns
+    discover: project-c
 spec:
   logLevel: debug
   retention: 1d
