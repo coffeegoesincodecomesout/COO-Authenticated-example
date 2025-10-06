@@ -40,6 +40,24 @@ spec:
   - from:
     - podSelector: {}
 ---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-thanos
+  namespace: project-b
+spec:
+  podSelector:
+    matchLabels:
+      prometheus: example-coo-monitoring-stack
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          project: project-c
+  - ports:
+    - protocol: TCP
+      port: 10901
+---
 apiVersion: monitoring.rhobs/v1alpha1
 kind: MonitoringStack
 metadata:
