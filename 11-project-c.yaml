@@ -46,7 +46,7 @@ metadata:
   name: example-coo-monitoring-stack
   namespace: project-c
   labels:
-    discover: project-c
+    discover: multi-ns
 spec:
   logLevel: debug
   retention: 1d
@@ -63,9 +63,13 @@ metadata:
   name: example-coo-thanos       
   namespace: project-c
 spec:
+  namespaceSelector:
+    matchNames:
+    - project-b
+    - project-c
   selector:
     matchLabels:
-      discover: project-c
+      discover: multi-ns
 ---
 apiVersion: apps/v1
 kind: Deployment
