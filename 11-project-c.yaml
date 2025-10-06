@@ -3,7 +3,42 @@ kind: Namespace
 metadata:
   name: project-c
   labels:
-    monitoring.rhobs/stack: multi-ns
+    monitoring.rhobs/stack: project-c
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: deny-by-default
+  namespace: project-c
+spec:
+  podSelector: {}
+  ingress: []
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-from-openshift-ingress
+  namespace: project-c
+spec:
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          policy-group.network.openshift.io/ingress: ""
+  podSelector: {}
+  policyTypes:
+  - Ingress
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-same-namespace
+  namespace: project-c
+spec:
+  podSelector: {}
+  ingress:
+  - from:
+    - podSelector: {}
 ---
 apiVersion: monitoring.rhobs/v1alpha1
 kind: MonitoringStack
@@ -20,7 +55,7 @@ spec:
         k8s-app: prometheus-coo-example-monitor
   namespaceSelector:
       matchLabels:
-        monitoring.rhobs/stack: multi-ns
+        monitoring.rhobs/stack: project-c
 ---
 apiVersion: monitoring.rhobs/v1alpha1
 kind: ThanosQuerier
@@ -28,6 +63,10 @@ metadata:
   name: example-coo-thanos       
   namespace: project-c
 spec:
+  namespaceSelector:
+    matchNames:
+    - project-b
+    - project-c
   selector:
     matchLabels:
       discover: multi-ns
