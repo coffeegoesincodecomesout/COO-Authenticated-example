@@ -3,3 +3,5 @@ oc -n project-a create secret generic thanos-proxy --from-literal=session_secret
 oc -n project-a create serviceaccount thanos-querier
 oc -n project-a annotate serviceaccount thanos-querier serviceaccounts.openshift.io/oauth-redirectreference.thanos-querier='{"kind":"OAuthRedirectReference","apiVersion":"v1","reference":{"kind":"Route","name":"thanos-querier-authenticated"}}'
 oc -n project-a annotate service thanos-querier-example-coo-thanos service.alpha.openshift.io/serving-cert-secret-name="thanos-tls"
+oc -n project-a create serviceaccount robot-user
+oc -n project-a adm policy add-role-to-user view -z robot-user
