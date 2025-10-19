@@ -56,7 +56,7 @@ oc apply -f 11-project-c.yaml
 ./12-project-c.sh
 oc apply -f 13-project-c-oauth-deploy.yaml --server-side
 ```
-test bearer token auth access to project-a
+Test bearer token auth access to project-a
 ```
 14-test-bearer-auth.sh
 ```
