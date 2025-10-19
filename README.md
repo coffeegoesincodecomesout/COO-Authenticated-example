@@ -1,7 +1,7 @@
 # COO-Authenticated-example
 
 Openshift container platform: cluster observability operator
-Authenticated access to metrics example
+This repo aims to provide an example COO multi tenant deployment with authenticated access to metrics.
 
 https://access.redhat.com/articles/7130526 
 
