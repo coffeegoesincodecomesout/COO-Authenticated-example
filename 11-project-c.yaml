@@ -142,25 +142,3 @@ spec:
       expr: version{job="prometheus-coo-example-app"} > 0
       labels:
         severity: warning
----
-apiVersion: v1
-kind: Service
-metadata:
-  annotations:
-    kubectl.kubernetes.io/last-applied-configuration: ""
-  name: thanos-querier-example-coo-thanos
-  namespace: project-c
-spec:
-  ports:
-  - name: proxy
-    port: 8888
-    protocol: TCP
-    targetPort: oauth-proxy
-  - name: http
-    port: 10902
-    protocol: TCP
-    targetPort: 10902
-  selector:
-    app.kubernetes.io/instance: thanos-querier-example-coo-thanos
-  sessionAffinity: None
-  type: ClusterIP
